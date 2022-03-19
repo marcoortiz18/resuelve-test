@@ -1,0 +1,21 @@
+org: markortiz18
+app: resuelve
+service: resuelve
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.8
+
+functions:
+  calculation:
+    handler: handler.salary_calculation
+    events:
+      - http:
+          path: /salary_calculation
+          method: post
+
+plugins:
+  - serverless-offline
+  - serverless-python-requirements

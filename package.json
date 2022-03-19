@@ -1,0 +1,24 @@
+{
+  "name": "resuelve-test",
+  "version": "1.0.0",
+  "description": "backend test resulve",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcoortiz18/resuelve-test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcoortiz18/resuelve-test/issues"
+  },
+  "homepage": "https://github.com/marcoortiz18/resuelve-test#readme",
+  "devDependencies": {
+    "serverless-offline": "^8.5.0",
+    "serverless-python-requirements": "^5.4.0"
+  }
+}
