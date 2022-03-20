@@ -15,6 +15,18 @@ functions:
       - http:
           path: /salary_calculation
           method: post
+  multi_calculation:
+    handler: handler.multi_salary_calculation
+    events:
+      - http:
+          path: /multi_salary_calculation
+          method: post
+  save_json:
+    handler: handler.save_json_file
+    events:
+      - http:
+          path: /save_json_file
+          method: post
 
 plugins:
   - serverless-offline
