@@ -1,10 +1,9 @@
 import sys
 import json
-
-from numpy import full
-
 class Player():
 
+    # Main function,
+    # This function is responsible for perform all the necessary steps to obtain the complete salary
     def salary_calculation(self, json_body):
         players = json_body["jugadores"]
         levels = json_body["niveles"]
@@ -26,7 +25,8 @@ class Player():
         response = {"statusCode": 200, "body": json.dumps(players_response)}
         return response
 
-    def get_levels(json_body):
+    # Function that returns the levels list that we use to get the minimum goals by level
+    def get_levels():
         levels = []
         url_file = "resuelve/backend/levels.json"
         json_file = open(url_file,"r")
@@ -35,6 +35,7 @@ class Player():
         json_file.close()
         return levels
 
+    # Function that set the minimum goals by level on players list
     def set_minimum_goals(players, levels):
         players_with_minimum_goals = []
         for player in players:
@@ -48,6 +49,7 @@ class Player():
         
         return players_with_minimum_goals
 
+    # Function that get the goals by the player levels
     def get_goals_by_level(levels, player_level):
         for level in levels:
             if player_level.lower() == level["nivel"].lower():
@@ -55,12 +57,14 @@ class Player():
 
                 return level_goals
     
+    # Function that get the individual percentage from a player based on his level
     def get_individual_percentage(player_goals, level_goals):
         quotient = player_goals / level_goals
         percent = quotient * 100
 
         return percent
 
+    # Function that get the full percentage from all players
     def get_full_percentage(players):
         full_percentage = []
         for player in players:
@@ -69,6 +73,7 @@ class Player():
 
         return full_percentage
 
+    # Function that get the average percentage based on the full percentage
     def get_team_percentage_avg(full_percentage):
         team_percentage = 0
         index = 0
@@ -80,6 +85,7 @@ class Player():
         
         return team_percentage    
 
+    # Function that get the complete salary from a player using the team_percentage and the individual_percent
     def get_complete_salary(player, team_percentage):
         complete_percentage = 0
         complete_salary = 0
@@ -97,6 +103,8 @@ class Player():
         
         return player
     
+    # Bonus function,
+    # This function is responsible to parse and provide all the json from different team and set the response
     def multi_salary_calculation(self, json_body):
         keys = json_body.keys()
 
@@ -113,14 +121,14 @@ class Player():
             multi_players.append(player)
             index += 1
         
-
-
         response = {"statusCode": 200, "body": json.dumps(multi_players)}
         return response
 
+    # Bonus function,
+    # This function is responsible to perform all the necessary steps to obtain the complete salary from multiple Teams players.
     def salary_calculations(self, json_body):
         players = json_body
-        levels = Player.get_levels(json_body)
+        levels = Player.get_levels(self)
         
         players_response = []
         players_aux = []
@@ -137,7 +145,8 @@ class Player():
             players_response.append(player_complete)
         
         return players_response
-
+    
+    # Function used to fill Levels elements.
     def post_levels_json(self,json_levels):
         url_file = "resuelve/backend/levels.json"
         json_file = open(url_file,"r+")

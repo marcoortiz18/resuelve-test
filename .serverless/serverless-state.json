@@ -89,6 +89,18 @@
               "LogGroupName": "/aws/lambda/resuelve-dev-calculation"
             }
           },
+          "MultiUnderscorecalculationLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/resuelve-dev-multi_calculation"
+            }
+          },
+          "SaveUnderscorejsonLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/resuelve-dev-save_json"
+            }
+          },
           "IamRoleLambdaExecution": {
             "Type": "AWS::IAM::Role",
             "Properties": {
@@ -203,6 +215,18 @@
                               "CalculationLogGroup",
                               "Arn"
                             ]
+                          },
+                          {
+                            "Fn::GetAtt": [
+                              "MultiUnderscorecalculationLogGroup",
+                              "Arn"
+                            ]
+                          },
+                          {
+                            "Fn::GetAtt": [
+                              "SaveUnderscorejsonLogGroup",
+                              "Arn"
+                            ]
                           }
                         ]
                       }
@@ -219,7 +243,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/resuelve/dev/1647656820610-2022-03-19T02:27:00.610Z/resuelve.zip"
+                "S3Key": "serverless/resuelve/dev/1647982726696-2022-03-22T20:58:46.696Z/resuelve.zip"
               },
               "Handler": "s_calculation.handler",
               "Runtime": "python3.8",
@@ -237,14 +261,84 @@
               "CalculationLogGroup"
             ]
           },
-          "CalculationLambdaVersionGnF4lTBrBJdfa0kSvT7CB2j9goujIO9X4FL2acZ4": {
+          "MultiUnderscorecalculationLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/resuelve/dev/1647982726696-2022-03-22T20:58:46.696Z/resuelve.zip"
+              },
+              "Handler": "s_multi_calculation.handler",
+              "Runtime": "python3.8",
+              "FunctionName": "resuelve-dev-multi_calculation",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "MultiUnderscorecalculationLogGroup"
+            ]
+          },
+          "SaveUnderscorejsonLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/resuelve/dev/1647982726696-2022-03-22T20:58:46.696Z/resuelve.zip"
+              },
+              "Handler": "s_save_json.handler",
+              "Runtime": "python3.8",
+              "FunctionName": "resuelve-dev-save_json",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "SaveUnderscorejsonLogGroup"
+            ]
+          },
+          "CalculationLambdaVersionxIhCxm8gVDuZSAwlxXvRIcxJKlrNJ2h37Y4pGk8vY": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CalculationLambdaFunction"
               },
-              "CodeSha256": "CiBua3oOLYBj2lD+6f9fTOZ/mmOYORiWWJgdRyOlfLk="
+              "CodeSha256": "h78M1ISCv5umM1B33v4HTGQVVVNejK0MwGr5TSlcgBs="
+            }
+          },
+          "MultiUnderscorecalculationLambdaVersiony8HStcIkSc1cLF4XvnedL1x6hF3aO5uSeAThN8LZRE": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "MultiUnderscorecalculationLambdaFunction"
+              },
+              "CodeSha256": "h78M1ISCv5umM1B33v4HTGQVVVNejK0MwGr5TSlcgBs="
+            }
+          },
+          "SaveUnderscorejsonLambdaVersionX0AEkiWE4WdUjozyiKb8L2yr41oxYJNurNs9Qo": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "SaveUnderscorejsonLambdaFunction"
+              },
+              "CodeSha256": "h78M1ISCv5umM1B33v4HTGQVVVNejK0MwGr5TSlcgBs="
             }
           },
           "ApiGatewayRestApi": {
@@ -269,6 +363,36 @@
                 ]
               },
               "PathPart": "salary_calculation",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceMultisalarycalculation": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "multi_salary_calculation",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceSavejsonfile": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "save_json_file",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -320,7 +444,99 @@
               "CalculationLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1647656813517": {
+          "ApiGatewayMethodMultisalarycalculationPost": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "POST",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceMultisalarycalculation"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "MultiUnderscorecalculationLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "MultiUnderscorecalculationLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayMethodSavejsonfilePost": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "POST",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceSavejsonfile"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "SaveUnderscorejsonLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "SaveUnderscorejsonLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayDeployment1647982718533": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -329,7 +545,9 @@
               "StageName": "dev"
             },
             "DependsOn": [
-              "ApiGatewayMethodSalarycalculationPost"
+              "ApiGatewayMethodSalarycalculationPost",
+              "ApiGatewayMethodMultisalarycalculationPost",
+              "ApiGatewayMethodSavejsonfilePost"
             ]
           },
           "CalculationLambdaPermissionApiGateway": {
@@ -338,6 +556,80 @@
               "FunctionName": {
                 "Fn::GetAtt": [
                   "CalculationLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "MultiUnderscorecalculationLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "MultiUnderscorecalculationLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "SaveUnderscorejsonLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "SaveUnderscorejsonLambdaFunction",
                   "Arn"
                 ]
               },
@@ -478,7 +770,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/resuelve/dev/1647656820610-2022-03-19T02:27:00.610Z/custom-resources.zip"
+                "S3Key": "serverless/resuelve/dev/1647982726696-2022-03-22T20:58:46.696Z/custom-resources.zip"
               },
               "FunctionName": "resuelve-dev-custom-resource-apigw-cw-role",
               "Handler": "api-gateway-cloud-watch-role/handler.handler",
@@ -503,6 +795,26 @@
               "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
               "LogGroupName": {
                 "Ref": "CalculationLogGroup"
+              }
+            }
+          },
+          "CWLSubFilterMultiUnderscorecalculationLogGroupUsEast1": {
+            "Type": "AWS::Logs::SubscriptionFilter",
+            "Properties": {
+              "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:a66d2fb2-c481-4705-a848-e3e4f5509bf0#Jv5pPyZjzZt69QFVKK#resuelve#dev",
+              "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
+              "LogGroupName": {
+                "Ref": "MultiUnderscorecalculationLogGroup"
+              }
+            }
+          },
+          "CWLSubFilterSaveUnderscorejsonLogGroupUsEast1": {
+            "Type": "AWS::Logs::SubscriptionFilter",
+            "Properties": {
+              "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:a66d2fb2-c481-4705-a848-e3e4f5509bf0#Jv5pPyZjzZt69QFVKK#resuelve#dev",
+              "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
+              "LogGroupName": {
+                "Ref": "SaveUnderscorejsonLogGroup"
               }
             }
           },
@@ -540,10 +852,28 @@
           "CalculationLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CalculationLambdaVersionGnF4lTBrBJdfa0kSvT7CB2j9goujIO9X4FL2acZ4"
+              "Ref": "CalculationLambdaVersionxIhCxm8gVDuZSAwlxXvRIcxJKlrNJ2h37Y4pGk8vY"
             },
             "Export": {
               "Name": "sls-resuelve-dev-CalculationLambdaFunctionQualifiedArn"
+            }
+          },
+          "MultiUnderscorecalculationLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "MultiUnderscorecalculationLambdaVersiony8HStcIkSc1cLF4XvnedL1x6hF3aO5uSeAThN8LZRE"
+            },
+            "Export": {
+              "Name": "sls-resuelve-dev-MultiUnderscorecalculationLambdaFunctionQualifiedArn"
+            }
+          },
+          "SaveUnderscorejsonLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "SaveUnderscorejsonLambdaVersionX0AEkiWE4WdUjozyiKb8L2yr41oxYJNurNs9Qo"
+            },
+            "Export": {
+              "Name": "sls-resuelve-dev-SaveUnderscorejsonLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -686,7 +1016,45 @@
         "timeout": 6,
         "runtime": "python3.8",
         "vpc": {},
-        "versionLogicalId": "CalculationLambdaVersionGnF4lTBrBJdfa0kSvT7CB2j9goujIO9X4FL2acZ4"
+        "versionLogicalId": "CalculationLambdaVersionxIhCxm8gVDuZSAwlxXvRIcxJKlrNJ2h37Y4pGk8vY"
+      },
+      "multi_calculation": {
+        "handler": "s_multi_calculation.handler",
+        "events": [
+          {
+            "http": {
+              "path": "multi_salary_calculation",
+              "method": "post",
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "resuelve-dev-multi_calculation",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "python3.8",
+        "vpc": {},
+        "versionLogicalId": "MultiUnderscorecalculationLambdaVersiony8HStcIkSc1cLF4XvnedL1x6hF3aO5uSeAThN8LZRE"
+      },
+      "save_json": {
+        "handler": "s_save_json.handler",
+        "events": [
+          {
+            "http": {
+              "path": "save_json_file",
+              "method": "post",
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "resuelve-dev-save_json",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "python3.8",
+        "vpc": {},
+        "versionLogicalId": "SaveUnderscorejsonLambdaVersionX0AEkiWE4WdUjozyiKb8L2yr41oxYJNurNs9Qo"
       }
     },
     "configValidationMode": "warn",
@@ -716,7 +1084,7 @@
     "artifact": "/Users/marko/Documents/resuelve-test/.serverless/resuelve.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/resuelve/dev/1647656820610-2022-03-19T02:27:00.610Z",
+    "artifactDirectoryName": "serverless/resuelve/dev/1647982726696-2022-03-22T20:58:46.696Z",
     "artifact": "resuelve.zip"
   }
 }
