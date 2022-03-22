@@ -80,13 +80,22 @@ Enter "rp" to replay the last request
 Habilite una API en caso de tener algun problema para poder desplegar el proyecto en local:
 
 * POST /salary_calculation
-  * Endpoint: ```bash https://h0tj6tlhfh.execute-api.us-east-1.amazonaws.com/dev/salary_calculation```
+  * Endpoint: 
+  ```bash 
+  https://h0tj6tlhfh.execute-api.us-east-1.amazonaws.com/dev/salary_calculation
+  ```
 
 * POST /multi_salary_calculation
-  * Endpoint: ```bash https://h0tj6tlhfh.execute-api.us-east-1.amazonaws.com/dev/multi_salary_calculation```
+  * Endpoint: 
+  ```bash 
+  https://h0tj6tlhfh.execute-api.us-east-1.amazonaws.com/dev/multi_salary_calculation
+  ```
 
 * POST /save_json_file
-  * Endpoint: ```bash https://h0tj6tlhfh.execute-api.us-east-1.amazonaws.com/dev/save_json_file```
+  * Endpoint: 
+  ```bash 
+  https://h0tj6tlhfh.execute-api.us-east-1.amazonaws.com/dev/save_json_file
+  ```
 
 ## Documentation
 
