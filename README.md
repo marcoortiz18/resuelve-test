@@ -77,26 +77,40 @@ Enter "rp" to replay the last request
 
 ## Bonus
 
-Habilite una API en caso de tener algun problema para poder desplegar el proyecto en local:
+Habilite una API y los json de prueba en caso de tener algun problema para poder desplegar el proyecto en local.
 
 * POST /salary_calculation
   * Endpoint: 
   ```bash 
   https://h0tj6tlhfh.execute-api.us-east-1.amazonaws.com/dev/salary_calculation
   ```
+  * [players.json](https://resuelve-test.s3.amazonaws.com/json_files/players.json)
 
 * POST /multi_salary_calculation
   * Endpoint: 
   ```bash 
   https://h0tj6tlhfh.execute-api.us-east-1.amazonaws.com/dev/multi_salary_calculation
   ```
+  * [multi_players.json](https://resuelve-test.s3.amazonaws.com/json_files/multi_players.json)
 
 * POST /save_json_file
   * Endpoint: 
   ```bash 
   https://h0tj6tlhfh.execute-api.us-east-1.amazonaws.com/dev/save_json_file
   ```
+  * [levels.json](https://resuelve-test.s3.amazonaws.com/json_files/levels.json)
 
+Para el correcto funcionamiento use postman y en la *Authorization* fue de tipo *AWS Signature*, asi mismo adjunto las keys necesarias.
+
+ Access Key
+ ```bash
+ AKIA6N2KWCM35WHT5M44
+ ``` 
+
+ Secret Key
+ ```bash
+ FKjZ6eE8b3EJsD09koP1XOrPyk9xy226Q553AuIf
+ ``` 
 ## Documentation
 
 Adjunto las URL de la documentación usada para realizar el presente proyecto:
