@@ -100,16 +100,16 @@ Habilite una API y los json de prueba en caso de tener algun problema para poder
   ```
   * [levels.json](https://resuelve-test.s3.amazonaws.com/json_files/levels.json)
 
-Para el correcto funcionamiento use postman y en la *Authorization* fue de tipo *AWS Signature*, asi mismo adjunto las keys necesarias.
+Para el correcto funcionamiento use postman y en la *Authorization* fue de tipo *AWS Signature*, asi mismo adjunto las keys necesarias. (Nota en la revision se las proveere)
 
  Access Key
  ```bash
- AKIA6N2KWCM35WHT5M44
+ ACCESS KEY
  ``` 
 
  Secret Key
  ```bash
- FKjZ6eE8b3EJsD09koP1XOrPyk9xy226Q553AuIf
+ SECRETE KEY
  ``` 
 ## Documentation
 
