@@ -82,21 +82,21 @@ Habilite una API y los json de prueba en caso de tener algun problema para poder
 * POST /salary_calculation
   * Endpoint: 
   ```bash 
-  https://h0tj6tlhfh.execute-api.us-east-1.amazonaws.com/dev/salary_calculation
+  https://2eh8nagahc.execute-api.us-east-1.amazonaws.com/dev/salary_calculation
   ```
   * [players.json](https://resuelve-test.s3.amazonaws.com/json_files/players.json)
 
 * POST /multi_salary_calculation
   * Endpoint: 
   ```bash 
-  https://h0tj6tlhfh.execute-api.us-east-1.amazonaws.com/dev/multi_salary_calculation
+  https://2eh8nagahc.execute-api.us-east-1.amazonaws.com/dev/multi_salary_calculation
   ```
   * [multi_players.json](https://resuelve-test.s3.amazonaws.com/json_files/multi_players.json)
 
 * POST /save_json_file
   * Endpoint: 
   ```bash 
-  https://h0tj6tlhfh.execute-api.us-east-1.amazonaws.com/dev/save_json_file
+  https://2eh8nagahc.execute-api.us-east-1.amazonaws.com/dev/save_json_file
   ```
   * [levels.json](https://resuelve-test.s3.amazonaws.com/json_files/levels.json)
 
